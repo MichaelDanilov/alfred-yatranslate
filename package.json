@@ -1,0 +1,36 @@
+{
+  "name": "alfred-yatranslate",
+  "version": "2.0.0",
+  "description": "Yandex.Translate workflow for Alfred",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "alfy-init",
+    "preuninstall": "alfy-cleanup",
+    "pretest": "npm run lint",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelDanilov/alfred-yatranslate.git"
+  },
+  "author": {
+    "name": "Michael Danilov",
+    "email": "michael@danilov.me",
+    "url": "https://danilov.me/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MichaelDanilov/alfred-yatranslate/issues"
+  },
+  "homepage": "https://github.com/MichaelDanilov/alfred-yatranslate#readme",
+  "dependencies": {
+    "alfy": "^0.9.1",
+    "lodash.without": "^4.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
