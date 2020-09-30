@@ -1,6 +1,6 @@
 {
   "name": "alfred-yatranslate",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Yandex.Translate workflow for Alfred",
   "main": "index.js",
   "scripts": {

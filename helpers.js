@@ -1,47 +1,69 @@
 const alfy = require('alfy');
 const without = require('lodash.without');
 
-const { YANDEX_TRANSLATE_API_URL, YANDEX_TRANSLATE_URL } = require('./constants');
+const pkg = require('./package.json');
+const {
+  YANDEX_TRANSLATE_API_URL,
+  YANDEX_TRANSLATE_URL,
+} = require('./constants');
 
-const { YANDEX_TRANSLATE_TOKEN, MYLANGS = 'ru,en' } = process.env;
+const { YANDEX_TRANSLATE_TOKEN, FOLDER_ID, MYLANGS = 'ru,en' } = process.env;
 
 if (!YANDEX_TRANSLATE_TOKEN) {
   alfy.error('YANDEX_TRANSLATE_TOKEN must be set');
+  process.exit(1);
+}
+if (!FOLDER_ID) {
+  alfy.error('FOLDER_ID must be set');
   process.exit(1);
 }
 
 const myLangs = MYLANGS.split(',');
 
 const helpers = {
-  fetch: (url = '') => alfy.fetch(`${YANDEX_TRANSLATE_API_URL}${url}`, {
+  fetch: (url = '', data = {}) => alfy.fetch(`${YANDEX_TRANSLATE_API_URL}${url}`, {
+    method: 'POST',
+    headers: {
+      authorization: `Api-Key ${YANDEX_TRANSLATE_TOKEN}`,
+      'user-agent': `${pkg.name}@${pkg.version}`,
+    },
     maxAge: 24 * 60 * 60 * 1000,
+    body: data,
   }),
   getDirs: async (input) => {
-    const response = await helpers.fetch(`/detect?key=${YANDEX_TRANSLATE_TOKEN}&text=${encodeURIComponent(input)}`);
+    try {
+      const response = await helpers.fetch('/detect', {
+        folder_id: FOLDER_ID,
+        text: input,
+      });
 
-    if (response.code === 200) {
-      const { lang } = response;
-      const destLangs = without(myLangs, lang);
+      const { languageCode } = response;
+      const destLangs = without(myLangs, languageCode);
 
-      return destLangs.map((destLang) => `${lang}-${destLang}`);
+      return destLangs;
+    } catch (error) {
+      return alfy.error(error);
     }
-
-    return alfy.error(response.code);
   },
   translate: async (input, dirs = []) => {
-    const promises = dirs.map((dir) => helpers.fetch(`/translate?key=${YANDEX_TRANSLATE_TOKEN}&text=${encodeURIComponent(input)}&lang=${dir}`));
+    const promises = dirs.map((dir) => helpers.fetch('/translate', {
+      folder_id: FOLDER_ID,
+      texts: input,
+      targetLanguageCode: dir,
+    }));
 
     const responses = await Promise.all(promises);
 
     const items = [];
-
-    responses.forEach(({ lang, text = [] } = {}) => {
-      text.forEach((t) => {
+    responses.forEach(({ translations } = {}) => {
+      translations.forEach(({ text, detectedLanguageCode } = {}) => {
         items.push({
-          title: t,
-          arg: `${YANDEX_TRANSLATE_URL}/?lang=${lang}&text=${encodeURIComponent(input)}`,
+          title: text,
+          arg: `${YANDEX_TRANSLATE_URL}/?lang=${detectedLanguageCode}&text=${encodeURIComponent(
+            input,
+          )}`,
           text: {
-            copy: t,
+            copy: text,
           },
         });
       });
