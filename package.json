@@ -1,6 +1,6 @@
 {
   "name": "alfred-yatranslate",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Yandex.Translate workflow for Alfred",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/MichaelDanilov/alfred-yatranslate#readme",
   "dependencies": {
-    "alfy": "^0.9.1",
+    "alfy": "^0.10.0",
     "lodash.without": "^4.4.0"
   },
   "devDependencies": {

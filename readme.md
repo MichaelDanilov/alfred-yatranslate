@@ -9,7 +9,7 @@
 
 By default just Russian -> English and English -> Russian.
 
-Use [Yandex.Translate API](https://tech.yandex.com/translate/).
+Use [Yandex.Translate API](https://cloud.yandex.com/docs/translate/).
 
 ## Install
 
@@ -21,17 +21,16 @@ P.S.: You need to [buy the Powerpack](https://buy.alfredapp.com/) to use this wo
 npm install -g alfred-yatranslate
 ```
 
-- Open [Yandex.Translate Token request form](https://tech.yandex.com/keys/get/?service=trnsl) and request API key for you
-- After on [this page](https://tech.yandex.com/keys/?service=trnsl) you can see all your keys for API requests.
+- Use [this](https://cloud.yandex.com/docs/iam/operations/api-key/create) instruction to create API key for service account.
 - Copy your API key to workflow as `YANDEX_TRANSLATE_TOKEN`.
+- Copy your folder id to workflow as `FOLDER_ID`.
 - Also you can modify `MYLANGS` with your languages. Comma-separated.
 - That's all, now open your Alfred and enjoy ;)
 
-
 ## Licenses and Copyrights
 
-MIT © 2019 [Michael Danilov](https://danilov.me)
+MIT © 2020 [Michael Danilov](https://danilov.me)
 
-[Terms of Use of API Yandex.Translate Service](https://yandex.com/legal/translate_api/)
+[Terms of Use of Yandex.Cloud Platform Service](https://yandex.ru/legal/cloud_termsofuse/?lang=en)
 
 Yandex.Translate logo © [Yandex](https://www.yandex.com/)
