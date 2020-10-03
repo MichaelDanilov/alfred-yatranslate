@@ -5,3 +5,4 @@
 .git
 .npmignore
 index.ts
+src
