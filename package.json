@@ -1,14 +1,19 @@
 {
   "name": "alfred-yatranslate",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Yandex.Translate workflow for Alfred",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf node_modules dist",
+    "lint:ts": "eslint --ext .ts,.tsx .",
+    "lint": "run-p lint:* spellcheck",
+    "spellcheck": "yaspeller *.md",
+    "prepublishOnly": "npm run build",
     "postinstall": "alfy-init",
     "preuninstall": "alfy-cleanup",
     "pretest": "npm run lint",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --fix"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -25,12 +30,22 @@
   },
   "homepage": "https://github.com/MichaelDanilov/alfred-yatranslate#readme",
   "dependencies": {
-    "alfy": "^0.10.0",
-    "lodash.without": "^4.4.0"
+    "alfy": "0.10.0",
+    "lodash": "4.17.20"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "@types/lodash": "4.14.161",
+    "@types/node": "14.11.2",
+    "@typescript-eslint/eslint-plugin": "4.3.0",
+    "@typescript-eslint/parser": "4.3.0",
+    "eslint": "7.10.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-prettier": "6.12.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-prettier": "3.1.4",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.1.2",
+    "typescript": "4.0.3",
+    "yaspeller": "7.0.0"
   }
 }

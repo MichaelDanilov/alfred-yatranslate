@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist",
+    "declaration": true,
+    "strict": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "resolveJsonModule": true
+  },
+  "exclude": ["test", "dist"]
+}

@@ -1,6 +1,6 @@
-const alfy = require('alfy');
+import alfy from 'alfy';
 
-const { getDirs, translate } = require('./helpers');
+import { getDirs, translate } from './src';
 
 (async () => {
   const { input = '' } = alfy;
@@ -12,5 +12,9 @@ const { getDirs, translate } = require('./helpers');
   }
 
   const dirs = await getDirs(cleanInput);
+  if (!dirs) {
+    return;
+  }
+
   await translate(cleanInput, dirs);
 })();
