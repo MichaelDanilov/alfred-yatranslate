@@ -31,7 +31,7 @@
   "homepage": "https://github.com/MichaelDanilov/alfred-yatranslate#readme",
   "dependencies": {
     "alfy": "0.10.0",
-    "lodash": "4.17.20"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@types/lodash": "4.14.161",
